@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 from unittest.mock import MagicMock
-from unittest.mock import self
+
 
 
 from main import get_joke, len_joke
@@ -18,6 +18,7 @@ class TestJoke(unittest.TestCase):
     def test_get_joke(self, mock_requests):
        mock_response = MagicMock()
        mock_response.status_code = 200
+       mock_response.json.return_value ={
           'value' : 'Hello world'
        }
        mock_requests.get.return_value = mock_response
