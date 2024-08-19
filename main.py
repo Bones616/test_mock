@@ -2,12 +2,19 @@ import requests
 
 def get_joke() :
     url = 'https://api.chucknorris.io/jokes/random'
-    response = requests.get(url)
 
-    if response.status_code == 200:
-       joke = response.json()['value']
+    try:
+       response = requests.get(url, timeout=10)
+       response.raise_for_status()
+
+    except requests.exceptions.Timeout:
+        return 'No jokes'
+
+    except requests.exceptions.ConnectionError:
+         return 'HTTPError was raised'
+
     else:
-        joke = 'No jokes'
+        joke = response.json()['value']
     return joke
 
 def len_joke() :
