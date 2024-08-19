@@ -1,3 +1,4 @@
+import self
 import unittest
 from unittest.mock import patch
 from unittest.mock import MagicMock
